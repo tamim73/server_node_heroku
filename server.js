@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 
 //.........signin
 app.post('/signin', (req, res) => {
-    db('login').where('eamil',req.email)
+    db('login').where('email',req.email)
     .then(user => {
         res.status(200).send(user)
     })
