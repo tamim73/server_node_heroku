@@ -32,18 +32,16 @@ app.post('/signin', (req, res) => {
     res.json("signing...")
 })
 //!......... register 
-// app.post('/register', (req, res) => {
-//     db('login')
-//     .insert(req.body)
-//     .returning('*')
-//     .then(emp => {
-//         res.json(emp[0]);
-//     })
-//     .catch(err => res.status(400).json('cant register'))
-// })
 app.post('/register', (req, res) => {
-    res.json("signing...")
+    db('login')
+    .insert(req.body)
+    .returning('*')
+    .then(emp => {
+        res.json(emp[0]);
+    })
+    .catch(err => res.status(400).json('cant register'))
 })
+
 //!.........deparments
 app.get('/deps/all', (req, res) => {
     db.select().from('departments').then(data => res.json(data))
