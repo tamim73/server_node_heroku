@@ -33,11 +33,12 @@ app.post('/signin', (req, res) => {
 })
 //!......... register 
 app.post('/register', (req, res) => {
-    db('login')
-    .insert(req.body)
-    .returning('*')
-    .then(emp => {
-        res.json(emp[0]);
+    // db('login')
+    // .insert(req.body)
+    // .returning('*')
+    // .then(emp => {
+    //     res.json(emp[0]);
+    res.json("registering...")
     })
     .catch(err => res.status(400).json('cant register'))
 })
