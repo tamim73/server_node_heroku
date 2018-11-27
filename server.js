@@ -29,15 +29,20 @@ app.get('/', (req, res) => {
 
 //.........signin
 app.post('/signin', (req, res) => {
-    res.json("signing...")
+    db('login').where('eamil',req.email)
+    .then(user => {
+        res.status(200).send(user)
+    })
 })
 //!......... register 
 app.post('/register', (req, res) => {
     db('login')
     .insert(req.body)
     .returning('*')
-    .then(emp => {
-        res.json(emp[0]);
+    .then(user => {
+        let payload = { subject: user.id}
+        let token = jwt.sign(payload, 'secretKey')
+        res.status(200).send({token});
     })
     .catch(err => res.status(400).json('cant register'))
 })
